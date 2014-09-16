@@ -7,9 +7,9 @@ from rest_framework.routers import DefaultRouter
 from api import views
 router = DefaultRouter()
 router.register(r'categories', views.CategorieViewSet)
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-
+router.register(r'restaurants', views.RestaurantViewSet)
+router.register(r'foods', views.FoodViewSet)
+router.register(r'orders', views.OrderViewSet)
 
 urlpatterns = patterns('',
     # Examples:

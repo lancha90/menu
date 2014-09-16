@@ -97,9 +97,9 @@ DATABASES = {
 }
 ALLOWED_HOSTS = []
 STATIC_ROOT = ''
-
-# =========== END LOCAL CONFIGURATION =====================
 """
+# =========== END LOCAL CONFIGURATION =====================
+
 
 
 # Internationalization
