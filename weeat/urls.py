@@ -10,6 +10,7 @@ router.register(r'categories', views.CategorieViewSet)
 router.register(r'restaurants', views.RestaurantViewSet)
 router.register(r'foods', views.FoodViewSet)
 router.register(r'orders', views.OrderViewSet)
+#router.register(r'foodscat/foods', views.FoodsCategorieViewSet,'foods')
 
 urlpatterns = patterns('',
     # Examples:

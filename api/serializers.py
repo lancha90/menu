@@ -19,5 +19,5 @@ class FoodSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Food
+        model = Order
         fields = ('id', 'table','foods','comment')

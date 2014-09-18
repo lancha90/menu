@@ -1,0 +1,51 @@
+@media (max-width: 811px ){
+	div.banner h2{
+		-webkit-transform: rotate(-90deg);
+		margin-bottom: 88px;
+		margin-left: -30px;
+	}
+}
+
+body{
+	font-size: 16px;
+}
+
+div.banner{
+	background-color: #DF691A;
+	position: fixed;
+	height: 100%;
+	margin: 0px;
+	vertical-align: top;
+	width: 20%;
+}
+div.banner h2{
+	font-size: 4em;
+	position: absolute;
+	bottom: 0;
+}
+
+div.container{
+	height: 100%;
+	margin: 0px;
+	vertical-align: top;
+	margin-left: 20%;
+	padding: 0px;
+	width: 80%;
+}
+div.container div.item-categorie{
+	border: solid 1px red;
+	cursor: pointer;
+	margin: 1em;
+}
+
+div.container nav.navbar{
+	padding: 0.5em 1em;
+}
+
+
+/*
+Bootstrap rewritte
+*/
+.form-group{
+	margin-bottom: 0px;
+}

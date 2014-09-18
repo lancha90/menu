@@ -42,11 +42,13 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'api',
     'server',
 )
 
 MIDDLEWARE_CLASSES = (
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -56,9 +58,13 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'weeat.urls'
-
 WSGI_APPLICATION = 'weeat.wsgi.application'
 
+# ================= CORS CONFIGURATION ===================
+USE_ETAGS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_URLS_REGEX = r'^/api/v1/.*$'
+# ================= END CORS CONFIGURATION ===================
 
 
 # =========== HEROKU CONFIGURATION =====================
@@ -97,9 +103,9 @@ DATABASES = {
 }
 ALLOWED_HOSTS = []
 STATIC_ROOT = ''
-"""
-# =========== END LOCAL CONFIGURATION =====================
 
+# =========== END LOCAL CONFIGURATION =====================
+"""
 
 
 # Internationalization
@@ -127,7 +133,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(FOLDER_PROJECT,'static'),
 )
 
 TEMPLATE_DIRS = (
