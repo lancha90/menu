@@ -14,7 +14,7 @@ router.register(r'orders', views.OrderViewSet)
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'weeat.views.home', name='home'),
+    url(r'^$', 'server.views.index', name='index'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),

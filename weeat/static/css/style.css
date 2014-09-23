@@ -32,16 +32,33 @@ div.container{
 	padding: 0px;
 	width: 80%;
 }
-div.container div.item-categorie{
-	border: solid 1px red;
+div.container div.cart_shop{
+	margin: 1em;
+}
+div.container div.cart_shop div{
+	display: inline-block;
+	vertical-align: top;
+}
+
+div.container div.item_row{
+	border: solid 1px white;
+	display: inline-block;
 	cursor: pointer;
 	margin: 1em;
+	text-align: center;
+	vertical-align: top;
+	width: 25%;
 }
 
 div.container nav.navbar{
 	padding: 0.5em 1em;
 }
 
+
+img.icon_item{
+	width: 200px;
+	height: 200px;
+}
 
 /*
 Bootstrap rewritte

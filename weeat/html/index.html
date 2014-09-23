@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="we_eat">
+    <head>
+        <meta charset="utf-8">
+        <meta content="Diego Mauricio Herrera Alzate" name="author"/>
+
+        <title>We Eat</title>
+ 
+        <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/style.css">
+
+        <script type="text/javascript" src="{{STATIC_URL}}js/angular.min.js"></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/main.js"></script>
+        <!--[if lt IE 9]> HTML5Shiv
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+ 
+    </head>
+    <body ng-controller="mainController">
+        
+        <div class="banner">
+            
+            <button type="button" class="btn btn-default btn-lg" ng-click="view_order()">
+                <span class="glyphicon glyphicon-shopping-cart"></span> {[{ cart_shop.length }]}
+            </button>
+            <h2>Menú</h2>
+        </div>
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                </div>
+            </nav>
+
+            
+            <div ng-show="is_categories" >
+                <div class="item_row item_categorie" ng-repeat="item in categories" ng-click="view_foods(item.id,item.name)">
+                    <img class="icon_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
+                    <h4 class="item_row_name">{[{item.name}]}</h4>
+                </div>
+            </div>
+
+            <div ng-show="is_foods" >
+                <h2>{[{name_categorie}]}</h2>
+                <div class="item_row item_food" ng-repeat="item in foods_categories" ng-click="view_food_detail(item)">
+                    <img class="icon_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
+                    <h4>{[{item.name}]}</h4>
+                    <h4>{[{item.cost}]}</h4>
+                </div>
+            </div>
+
+            <div ng-show="is_detail_foods" >
+                <h2>{[{current_food.name}]}</h2>
+                <img class="icon_item" src="{[{url_image}]}{[{current_food.image}]}" alt="{[{current_food.name}]}">
+                <h4>{[{current_food.name}]}</h4>
+                <h4>{[{current_food.cost}]}</h4>
+                <p>{[{current_food.description}]}</p>
+                <button type="button" class="btn btn-default btn-lg" ng-click="add_cart_shop(current_food)">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>Adicionar
+                </button>
+            </div>
+
+
+            <div class="cart_shop" ng-show="is_cart_shop" >
+                <h2>Orden Actual</h2>
+                <ul ng-repeat="item in cart_shop">
+                    <li ng-repeat="item in cart_shop">
+                        <div>
+                            <img class="icon_list_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
+                        </div>
+                        <div>
+                            <h4>{[{item.name}]}</h4>
+                            <h4>{[{item.cost}]}</h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </body>
+</html>
