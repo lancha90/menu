@@ -9,6 +9,7 @@ we_eat.config(function($interpolateProvider){
 function mainController($scope, $http) {
     // Configuración
     $scope.formData = {};
+    $scope.navigation = [];
     $scope.url_image = 'http://we-eat.herokuapp.com/static/css/image/';
 
 
@@ -22,7 +23,6 @@ function mainController($scope, $http) {
     // Contexto
     $scope.cart_shop = [];
     $scope.current_food;
-
 
     $http.defaults.headers.common['Authorization'] = 'Basic cm9vdDpJbmdfZGhlcnJlcmFfOTA=';
     $http.defaults.headers.common['Accept'] = 'application/json';
@@ -44,11 +44,29 @@ function mainController($scope, $http) {
             console.log('Error: ' + data);
         });
 
+    $scope.back=function(){
+        if($scope.navigation.length > 1 ){
+            $scope.navigation.pop();
+            toShow=$scope.navigation.pop();
+
+            toShow.event.apply(this,toShow.params);
+        }
+    }
 
     // Adiciona un item a la orden 
     $scope.add_cart_shop=function(_food){
         $scope.cart_shop.push(_food);
     };
+
+    // Visualizar el listado de categorias del restaurante
+    $scope.view_categories=function(){
+        $scope.hide_view();
+        $scope.is_categories = true;
+        $scope.navigation.push({
+            event:$scope.view_categories, 
+            params: []
+        });   
+    }
 
     // Visualizar los platos de la categoria seleccionada
     $scope.view_foods=function(_id,_name){
@@ -63,6 +81,10 @@ function mainController($scope, $http) {
         $scope.hide_view();
         $scope.is_foods = true;
         $scope.name_categorie=_name;
+        $scope.navigation.push({
+            event: $scope.view_foods,
+            params: [_id,_name]
+        });
     };
 
     // Visualizar el datalle de un plato seleccionado
@@ -70,12 +92,20 @@ function mainController($scope, $http) {
         $scope.current_food=_food;
         $scope.hide_view();
         $scope.is_detail_foods = true;
+        $scope.navigation.push({
+            event:$scope.view_food_detail,
+            params:[_food]
+        });
     }
 
     // Visualizar el listado de platos en la orden
     $scope.view_order=function(){
         $scope.hide_view();
         $scope.is_cart_shop = true;
+        $scope.navigation.push({
+            event:$scope.view_order, 
+            params: []
+        });   
     }
 
     // Oculta todos los views
@@ -86,6 +116,11 @@ function mainController($scope, $http) {
         $scope.is_cart_shop = false;
     };
 
+
+    $scope.navigation.push({
+        event: $scope.view_categories,
+        params: []
+    });
 
     // Cuando se añade un nuevo TODO, manda el texto a la API
     /*$scope.createTodo = function(){
