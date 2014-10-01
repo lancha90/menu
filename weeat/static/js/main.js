@@ -10,7 +10,8 @@ function mainController($scope, $http) {
     // Configuración
     $scope.formData = {};
     $scope.navigation = [];
-    $scope.url_image = 'http://we-eat.herokuapp.com/static/css/image/';
+    $scope.url_base = 'http://we-eat.herokuapp.com/';
+    $scope.url_image = $scope.url_base+'static/css/image/';
 
 
     // Navegación
@@ -26,9 +27,10 @@ function mainController($scope, $http) {
 
     $http.defaults.headers.common['Authorization'] = 'Basic cm9vdDpJbmdfZGhlcnJlcmFfOTA=';
     $http.defaults.headers.common['Accept'] = 'application/json';
+    $http.defaults.headers.common['Content-Type'] = 'application/json';
 
     // Cuando se cargue la página, pide del API todos los TODOs
-   $http.get('http://we-eat.herokuapp.com/api/v1/categories/')
+   $http.get($scope.url_base+'api/v1/categories/')
         .success(function(data) {
             $scope.categories = data;
         })
@@ -36,7 +38,7 @@ function mainController($scope, $http) {
             console.log('Error: ' + data);
         });
 
-    $http.get('http://we-eat.herokuapp.com/api/v1/restaurants/1/foods/')
+    $http.get($scope.url_base+'api/v1/restaurants/1/foods/')
         .success(function(data) {
             $scope.foods = data;
         })
@@ -121,6 +123,26 @@ function mainController($scope, $http) {
         event: $scope.view_categories,
         params: []
     });
+
+    // envia la petición al servidor para tramitar la orden 
+    $scope.send_order=function(){
+        $http.post($scope.url_base+'api/v1/orders/', {
+            "table": 1, 
+            "foods": [
+                1, 
+                2
+            ], 
+            "comment": "sin ensalada por favor"
+            })
+            .success(function(data) {
+                $scope.formData = {};
+                $scope.todos = data;
+                console.log(data);
+            })
+            .error(function(data) {
+                console.log('Error:' + data);
+            });
+    };
 
     // Cuando se añade un nuevo TODO, manda el texto a la API
     /*$scope.createTodo = function(){

@@ -34,7 +34,7 @@ class FoodViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Food.objects.all()
     serializer_class = FoodSerializer
 
-class OrderViewSet(viewsets.ReadOnlyModelViewSet):
+class OrderViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
