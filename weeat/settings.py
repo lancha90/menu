@@ -67,6 +67,24 @@ CORS_URLS_REGEX = r'^/api/v1/.*$'
 # ================= END CORS CONFIGURATION ===================
 
 
+
+# ================== S3 CONFIGURATION =========================
+
+DEFAULT_FILE_STORAGE = 'server.s3utils.MediaS3BotoStorage' 
+STATICFILES_STORAGE = 'server.s3utils.StaticS3BotoStorage'
+
+AWS_ACCESS_KEY_ID = 'AKIAJ6NDBSYF5YSLO7YQ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'weeat'
+
+S3_URL = 'http://%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+STATIC_DIRECTORY = '/static/'
+MEDIA_DIRECTORY = '/media/'
+STATIC_URL = S3_URL + STATIC_DIRECTORY
+MEDIA_URL = S3_URL + MEDIA_DIRECTORY
+
+# ================== END S3 CONFIGURATION =========================
+
 # =========== HEROKU CONFIGURATION =====================
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -107,7 +125,6 @@ STATIC_ROOT = ''
 # =========== END LOCAL CONFIGURATION =====================
 """
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -126,7 +143,7 @@ MEDIA_ROOT = os.path.join(FOLDER_PROJECT,'static/css/image')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (

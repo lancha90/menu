@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 from django.db import models
 import datetime
 
+ORDER_STATE =(
+	(0, 'Cerrada'),
+    (1, 'Pendiente'),
+    (2, 'Cancelada'),
+)
+
 # Create your models here.
 
 class Country(models.Model):
@@ -87,6 +93,7 @@ class Order(models.Model):
 	table=models.ForeignKey(Table, related_name='u+')
 	foods=models.ManyToManyField(Food, related_name='u+')
 	comment=models.CharField(max_length=1000)
+	state=models.IntegerField(choices=ORDER_STATE,max_length=2)
 	def __unicode__(self):
 		return u'%s  - %s' % (self.table.id,self.table.restaurant)
 	def natural_key(self):

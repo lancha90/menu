@@ -71,7 +71,11 @@
 
             <div class="cart_shop" ng-show="is_cart_shop" >
                 <h2>Orden Actual</h2>
-                <ul ng-repeat="item in cart_shop">
+                <button type="button" class="btn btn-default btn-lg" ng-click="send_order()">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>Adicionar
+                </button>
+
+                <ul>
                     <li ng-repeat="item in cart_shop">
                         <div>
                             <img class="icon_list_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">

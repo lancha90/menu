@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta content="Diego Mauricio Herrera Alzate" name="author"/>
+
+        <title>WeEat - {% block title %}{% endblock %}</title>
+ 
+        <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{STATIC_URL}}css/admin/style.css">
+
+        <!--[if lt IE 9]> HTML5Shiv
+            <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {% block head %}
+        {% endblock %}
+ 
+    </head>
+    <body>
+        <header>
+            {% block heaer %}
+                <h1>We Eat</h1>
+            {% endblock %}
+             {% if user.username != '' %}
+                    <h2>{{user.username}}</h2>
+                    <a href="/users/logout">
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon"></span> Sing out
+                    </button>
+                </a>
+                {% endif %}
+        </header>
+
+    <div class="content">
+        {% block container %}
+
+        {% endblock %}
+    </div>
+ 
+    <footer>
+        
+    </footer>
+        <script src="{{STATIC_URL}}js/angular.min.js"></script>
+        <script src="{{STATIC_URL}}js/admin.js"></script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'template.html' %}
+
+{% block head %}
+    {% load jsonify %}
+    <script type="text/javascript">
+    	var orders={{ orders|jsonify }};
+    </script>
+{% endblock %}
+
+{% block container %}
+
+		
+
+		{% for order in orders %}
+			<div class="panel"> 
+				<div>
+					<h2>Mesa: {{order.table.number}}</h2>
+				</div>
+				<div class="panel-left">
+					<ul class="list-group">
+						{% for food in order.foods.all %}
+							<li class="list-group-item">{{food.name}}</li>
+						{% endfor %}
+					</ul>
+					<h2>{{order.comment}}</h2>
+				</div>
+				<div class="panel-right">
+					<button type="button" class="btn btn-default" ref="{{order.foods.all}}">
+                        <span class="glyphicon glyphicon-ok label label-success">Finalizado</span>
+                    </button>
+				</div>
+
+			 </div>
+		{% endfor %}
+
+{% endblock %}

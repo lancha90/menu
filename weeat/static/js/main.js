@@ -126,12 +126,16 @@ function mainController($scope, $http) {
 
     // envia la petición al servidor para tramitar la orden 
     $scope.send_order=function(){
+
+        list_order = [];
+        for(i in $scope.cart_shop){
+            list_order.push($scope.cart_shop[i].id);
+        }
+
+
         $http.post($scope.url_base+'api/v1/orders/', {
             "table": 1, 
-            "foods": [
-                1, 
-                2
-            ], 
+            "foods": list_order, 
             "comment": "sin ensalada por favor"
             })
             .success(function(data) {
@@ -140,7 +144,8 @@ function mainController($scope, $http) {
                 console.log(data);
             })
             .error(function(data) {
-                console.log('Error:' + data);
+                console.log('Error:');
+                console.log(data);
             });
     };
 

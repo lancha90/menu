@@ -1,0 +1,10 @@
+div.panel div.panel-left{
+	display: inline-block;
+	vertical-align: middle;
+	width: 88%;
+}
+div.panel div.panel-right{
+	display: inline-block;
+	vertical-align: middle;
+	width: 10%;
+}
