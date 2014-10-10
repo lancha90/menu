@@ -11,7 +11,7 @@ function mainController($scope, $http) {
     $scope.formData = {};
     $scope.navigation = [];
     $scope.url_base = 'http://we-eat.herokuapp.com/';
-    $scope.url_image = $scope.url_base+'static/css/image/';
+    $scope.url_image = 'https://s3.amazonaws.com/weeat/media/weeat/';
 
 
     // Navegación
