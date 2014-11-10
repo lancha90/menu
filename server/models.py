@@ -40,10 +40,13 @@ class Categorie(models.Model):
 	image=models.FileField(upload_to='weeat', verbose_name='Imagen')
 	description=models.CharField(max_length=1000)
 	timestamp=models.DateTimeField(auto_now_add=True)
+	index = models.IntegerField()
 	def __unicode__(self):
 		return u'%s  - %s' % (self.id,self.name)
 	def natural_key(self):
 		return u'%s  - %s' % (self.id,self.name)
+	class Meta:
+		ordering = ('index',)
 
 class Restaurant(models.Model):
 	id=models.AutoField(primary_key=True)
@@ -68,14 +71,17 @@ class Food(models.Model):
 	name=models.CharField(max_length=255)
 	restaurant=models.ForeignKey(Restaurant, related_name='u+')
 	categorie=models.ManyToManyField(Categorie, related_name='Categories')
-	cost=models.DecimalField(max_digits=20, decimal_places=4)
+	cost=models.DecimalField(max_digits=20, decimal_places=0)
 	description=models.CharField(max_length=1000)
 	image=models.FileField(upload_to='weeat', verbose_name='Imagen')
 	timestamp=models.DateTimeField(auto_now_add=True)
+	index = models.IntegerField()
 	def __unicode__(self):
 		return u'%s  - %s' % (self.id,self.name)
 	def natural_key(self):
 		return u'%s  - %s' % (self.id,self.name)
+	class Meta:
+		ordering = ('index',)
 
 class Table(models.Model):
 	id=models.AutoField(primary_key=True)
