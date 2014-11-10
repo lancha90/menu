@@ -5,7 +5,7 @@ from server.models import *
 class CategorieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categorie
-        fields = ('id', 'name', 'image', 'description','timestamp')
+        fields = ('id', 'name', 'image', 'description','index','timestamp')
 
 class RestaurantSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,7 +15,7 @@ class RestaurantSerializer(serializers.ModelSerializer):
 class FoodSerializer(serializers.ModelSerializer):
     class Meta:
         model = Food
-        fields = ('id', 'name','description','categorie','image','cost','timestamp')
+        fields = ('id', 'name','description','categorie','image','cost','index','timestamp')
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:

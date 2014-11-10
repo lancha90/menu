@@ -5,17 +5,18 @@ we_eat.config(function($interpolateProvider){
     $interpolateProvider.endSymbol('}]}');
 });
 
-
 function mainController($scope, $http) {
+
     // Configuración
     $scope.formData = {};
     $scope.navigation = [];
     $scope.url_base = 'http://we-eat.herokuapp.com/';
-    $scope.url_image = 'https://s3.amazonaws.com/weeat/media/weeat/';
+    $scope.url_image = 'https://s3.amazonaws.com/weeat/media/';
 
 
     // Navegación
     $scope.breadcrumbs = [];
+    $scope.is_show_banner = false;
     $scope.is_categories = true;
     $scope.is_foods = false;
     $scope.is_detail_foods = false;
@@ -149,31 +150,37 @@ function mainController($scope, $http) {
             });
     };
 
-    // Cuando se añade un nuevo TODO, manda el texto a la API
-    /*$scope.createTodo = function(){
-        $http.post('/api/todos', $scope.formData)
-            .success(function(data) {
-                $scope.formData = {};
-                $scope.todos = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error:' + data);
-            });
-    };
+    $scope.remove_decimal=function(value){
+        return value.replace(/(\.\d+)+/,'');
+    }
 
-    // Borra un TODO despues de checkearlo como acabado
-    $scope.deleteTodo = function(id) {
-        $http.delete('/api/todos/' + id)
-            .success(function(data) {
-                $scope.todos = data;
-                console.log(data);
-            })
-            .error(function(data) {
-                console.log('Error:' + data);
-            });
-    };*/
+    $scope.show_banner=function(){
+
+        if(!$scope.is_show_banner){
+            $scope.is_show_banner = true;
+            $('div.container').css({'width':'80%','margin-left': '20%'});
+            $('div.banner').css({'margin-left':'0'});
+        }else{
+            $scope.is_show_banner = false;
+            $('div.container').css({'width':'100%','margin-left': '0'});
+            $('div.banner').css({'margin-left':'-20%'});
+        }
+    }
 }
 
+we_eat.filter('noFractionCurrency',
+    [ '$filter', '$locale', function(filter, locale) {
+      var currencyFilter = filter('currency');
+      var formats = locale.NUMBER_FORMATS;
+      return function(amount, currencySymbol) {
+        var value = currencyFilter(amount, currencySymbol);
+        var sep = value.indexOf(formats.DECIMAL_SEP);
+        console.log(amount, value);
+        if(amount >= 0) { 
+          return value.substring(0, sep);
+        }
+        return value.substring(0, sep) + ')';
+      };
+    } ]);
 
 we_eat.controller('mainController',mainController);

@@ -15,8 +15,16 @@ div.banner{
 	position: fixed;
 	height: 100%;
 	margin: 0px;
+	margin-left: -20%;
+	transition: all 2s;
 	vertical-align: top;
 	width: 20%;
+}
+div.banner div.banner-categories{
+	margin-top: 2em;
+}
+div.banner div.banner-categories h4{
+	cursor: pointer;
 }
 div.banner h2{
 	font-size: 4em;
@@ -28,10 +36,11 @@ div.container{
 	height: 100%;
 	margin: 0px;
 	vertical-align: top;
-	margin-left: 20%;
 	padding: 0px;
-	width: 80%;
+	transition: all 2s;
+	width: 100%;
 }
+
 div.container div.cart_shop{
 	margin: 1em;
 }
@@ -40,8 +49,11 @@ div.container div.cart_shop div{
 	vertical-align: top;
 }
 
+div.container div.div_center{
+	text-align: center;
+}
+
 div.container div.item_row{
-	border: solid 1px white;
 	display: inline-block;
 	cursor: pointer;
 	margin: 1em;
@@ -53,9 +65,19 @@ div.container div.item_row{
 div.container nav.navbar{
 	padding: 0.5em 1em;
 }
-
+div.container nav.navbar div{
+	display: inline-block;
+	vertical-align: middle;	
+}
+div.container nav.navbar div.container-fluid{
+	width: 92%;
+}
+div.container nav.navbar div.container-fluid div{
+	display: block;
+}
 
 img.icon_item{
+	border-radius: 50px;
 	width: 200px;
 	height: 200px;
 }
