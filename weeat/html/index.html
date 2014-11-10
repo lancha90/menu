@@ -29,6 +29,12 @@
                 <span class="glyphicon glyphicon-shopping-cart"></span> Atras
             </button>
 
+            <div class="banner-categories">
+                <div class="item_row item_categorie" ng-repeat="item in categories" ng-click="view_foods(item.id,item.name)">
+                        <h4 class="item_row_name">{[{item.name}]}</h4>
+                </div>
+            </div>
+            
             <h2>Menú</h2>
         </div>
         <div class="container">
@@ -41,14 +47,14 @@
             </nav>
 
             
-            <div ng-show="is_categories" >
+            <div class="div_center" ng-show="is_categories" >
                 <div class="item_row item_categorie" ng-repeat="item in categories" ng-click="view_foods(item.id,item.name)">
                     <img class="icon_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
                     <h4 class="item_row_name">{[{item.name}]}</h4>
                 </div>
             </div>
 
-            <div ng-show="is_foods" >
+            <div class="div_center" ng-show="is_foods" >
                 <h2>{[{name_categorie}]}</h2>
                 <div class="item_row item_food" ng-repeat="item in foods_categories" ng-click="view_food_detail(item)">
                     <img class="icon_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
@@ -57,11 +63,11 @@
                 </div>
             </div>
 
-            <div ng-show="is_detail_foods" >
+            <div class="div_center" ng-show="is_detail_foods" >
                 <h2>{[{current_food.name}]}</h2>
                 <img class="icon_item" src="{[{url_image}]}{[{current_food.image}]}" alt="{[{current_food.name}]}">
                 <h4>{[{current_food.name}]}</h4>
-                <h4>{[{current_food.cost}]}</h4>
+                <h4>"remove_decimal({[{current_food.cost}]})"</h4>
                 <p>{[{current_food.description}]}</p>
                 <button type="button" class="btn btn-default btn-lg" ng-click="add_cart_shop(current_food)">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Adicionar
@@ -69,7 +75,7 @@
             </div>
 
 
-            <div class="cart_shop" ng-show="is_cart_shop" >
+            <div class="cart_shop div_center" ng-show="is_cart_shop" >
                 <h2>Orden Actual</h2>
                 <button type="button" class="btn btn-default btn-lg" ng-click="send_order()">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Adicionar
