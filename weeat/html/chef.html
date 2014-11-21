@@ -12,21 +12,21 @@
 		
 
 		{% for order in orders %}
-			<div class="panel"> 
+			<div class="panel" id="order_{{order.order}}"> 
 				<div>
-					<h2>Mesa: {{order.table.number}}</h2>
+					<h2>Mesa: {{order.table}}</h2>
 				</div>
 				<div class="panel-left">
 					<ul class="list-group">
-						{% for food in order.foods.all %}
-							<li class="list-group-item">{{food.name}}</li>
+						{% for food in order.foods %}
+							<li class="list-group-item">{{food.count}} - {{food.name}}</li>
 						{% endfor %}
 					</ul>
 					<h2>{{order.comment}}</h2>
 				</div>
 				<div class="panel-right">
-					<button type="button" class="btn btn-default" ref="{{order.foods.all}}">
-                        <span class="glyphicon glyphicon-ok label label-success">Finalizado</span>
+					<button type="button" class="btn btn-default update-order" ng-click="complete_order({{order.order}})">
+                        <span class="glyphicon glyphicon-ok label label-success we-button">Finalizado</span>
                     </button>
 				</div>
 

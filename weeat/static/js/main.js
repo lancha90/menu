@@ -10,7 +10,8 @@ function mainController($scope, $http) {
     // Configuración
     $scope.formData = {};
     $scope.navigation = [];
-    $scope.url_base = 'http://we-eat.herokuapp.com/';
+    //$scope.url_base = 'http://we-eat.herokuapp.com/';
+    $scope.url_base = 'http://127.0.0.1:8000/';
     $scope.url_image = 'https://s3.amazonaws.com/weeat/media/';
 
 
@@ -58,7 +59,10 @@ function mainController($scope, $http) {
 
     // Adiciona un item a la orden 
     $scope.add_cart_shop=function(_food){
-        $scope.cart_shop.push(_food);
+
+        count = prompt('Digite la cantidad:');
+
+        $scope.cart_shop.push({'food':_food,'count':count});
     };
 
     // Visualizar el listado de categorias del restaurante
@@ -130,12 +134,13 @@ function mainController($scope, $http) {
 
         list_order = [];
         for(i in $scope.cart_shop){
-            list_order.push($scope.cart_shop[i].id);
+            list_order.push({
+                'food':$scope.cart_shop[i].food.id,
+                'count':$scope.cart_shop[i].count
+            });
         }
 
-
-        $http.post($scope.url_base+'api/v1/orders/', {
-            "table": 1, 
+        $http.post($scope.url_base+'api/v1/orders/1/add/', {
             "foods": list_order, 
             "comment": "sin ensalada por favor"
             })

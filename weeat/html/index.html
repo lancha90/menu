@@ -20,23 +20,18 @@
     </head>
     <body ng-controller="mainController">
         
-        <div class="banner">
-            
+        <div class="banner">            
             <button type="button" class="btn btn-default btn-lg" ng-click="view_order()">
                 <span class="glyphicon glyphicon-shopping-cart"></span> {[{ cart_shop.length }]}
             </button>
-
-
             <button type="button" class="btn btn-default btn-lg" ng-click="back()">
                 <span class="glyphicon glyphicon-shopping-cart"></span> Atras
             </button>
-
             <div class="banner-categories">
                 <div class="item_row item_categorie" ng-repeat="item in categories" ng-click="view_foods(item.id,item.name)">
                         <h4 class="item_row_name">{[{item.name}]}</h4>
                 </div>
             </div>
-            
             <h2>Menú</h2>
         </div>
         <div class="container">
@@ -54,7 +49,6 @@
                 </div>
             </nav>
 
-            
             <div class="div_center" ng-show="is_categories" >
                 <div class="item_row item_categorie" ng-repeat="item in categories" ng-click="view_foods(item.id,item.name)">
                     <img class="icon_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
@@ -65,7 +59,7 @@
             <div class="div_center" ng-show="is_foods" >
                 <h2>{[{name_categorie}]}</h2>
                 <div class="item_row item_food" ng-repeat="item in foods_categories" ng-click="view_food_detail(item)">
-                    <img class="icon_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
+                    <img class="icon_item" src="{[{url_image}]}{[{item.image[0].url}]}" alt="{[{item.name}]}">
                     <h4>{[{item.name}]}</h4>
                     <h4>{[{item.cost | currency}]}</h4>
                 </div>
@@ -73,36 +67,33 @@
 
             <div class="div_center" ng-show="is_detail_foods" >
                 <h2>{[{current_food.name}]}</h2>
-                <img class="icon_item" src="{[{url_image}]}{[{current_food.image}]}" alt="{[{current_food.name}]}">
+                <div class="item_image" ng-repeat="item in current_food.image">
+                    <img class="icon_item" src="{[{url_image}]}{[{item.url}]}" alt="{[{current_food.name}]}">
+                </div>
                 <h4>{[{current_food.name}]}</h4>
                 <h4> {[{current_food.cost | currency}]}</h4>
-
                 <p>{[{current_food.description}]}</p>
                 <button type="button" class="btn btn-default btn-lg" ng-click="add_cart_shop(current_food)">
                     <span class="glyphicon glyphicon-shopping-cart"></span>Adicionar
                 </button>
             </div>
 
-
             <div class="cart_shop div_center" ng-show="is_cart_shop" >
                 <h2>Orden Actual</h2>
                 <button type="button" class="btn btn-default btn-lg" ng-click="send_order()">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>Adicionar
+                    <span class="glyphicon glyphicon-shopping-cart"></span>Enviar Pedido
                 </button>
-
-                    <div class="item_row item_food" ng-repeat="item in cart_shop">
-                        <div>
-                            <img class="icon_item" src="{[{url_image}]}{[{item.image}]}" alt="{[{item.name}]}">
-                        </div>
-                        <div>
-                            <h4>{[{item.name}]}</h4>
-                            <h4>{[{item.cost | currency}]}</h4>
-                        </div>
+                <div class="item_row item_food" ng-repeat="item in cart_shop">
+                    <div>
+                        <img class="icon_item" src="{[{url_image}]}{[{item.food.image[0].url}]}" alt="{[{item.food.name}]}">
                     </div>
-
+                    <div>
+                        <h4>{[{item.count}]}</h4>
+                        <h4>{[{item.food.name}]}</h4>
+                        <h4>{[{item.food.cost | currency}]}</h4>
+                    </div>
+                </div>
             </div>
-
         </div>
-
     </body>
 </html>

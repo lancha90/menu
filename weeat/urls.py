@@ -15,7 +15,8 @@ router.register(r'orders', views.OrderViewSet)
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'server.views.index', name='index'),
-    url(r'^chef/', 'server.views.chef', name='chef'),
+    url(r'^chef/$', 'server.views.chef', name='chef'),
+    url(r'^chef/update_order/', 'server.views.update_order', name='update_order'),
     url(r'^users/login/$', 'server.views.login_user', name='login_user'),
     url(r'^users/logout/$', 'server.views.logout_user', name='logout_user'),
 

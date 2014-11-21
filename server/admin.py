@@ -5,6 +5,8 @@ from server.models import *
 admin.site.register(Categorie)
 admin.site.register(City)
 admin.site.register(Country)
+admin.site.register(Details)
+admin.site.register(Image)
 admin.site.register(Food)
 admin.site.register(Restaurant)
 admin.site.register(Order)

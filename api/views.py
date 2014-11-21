@@ -6,6 +6,9 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import *
 from rest_framework.decorators import detail_route, list_route
+import json
+
+
 
 
 class CategorieViewSet(viewsets.ReadOnlyModelViewSet):
@@ -40,3 +43,19 @@ class OrderViewSet(viewsets.ModelViewSet):
     """
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+
+    @detail_route(methods=['POST'])
+    def add(self, request,pk=None):
+        table = Table.objects.get(pk=pk)
+        comment = request.DATA['comment']
+        order = Order.objects.create(table=table,comment=comment,state=1)
+        order.save()
+        
+        list_foods = request.DATA['foods']
+        for item in list_foods:
+            food = Food.objects.get(pk=item['food'])
+            count = item['count']
+            details = Details.objects.create(order=order,food=food,count=count)
+
+        serializer = OrderSerializer(order,many=False)
+        return Response(serializer.data)

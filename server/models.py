@@ -12,6 +12,15 @@ ORDER_STATE =(
 
 # Create your models here.
 
+class Image(models.Model):
+	id=models.AutoField(primary_key=True)
+	name=models.CharField(max_length=255)
+	url=models.FileField(upload_to='weeat', verbose_name='Imagen')
+	def __unicode__(self):
+		return u'%s' % (self.url)
+	def natural_key(self):
+		return u'%s' % (self.url)
+
 class Country(models.Model):
 	id=models.AutoField(primary_key=True)
 	name=models.CharField(max_length=255)
@@ -73,7 +82,7 @@ class Food(models.Model):
 	categorie=models.ManyToManyField(Categorie, related_name='Categories')
 	cost=models.DecimalField(max_digits=20, decimal_places=0)
 	description=models.CharField(max_length=1000)
-	image=models.FileField(upload_to='weeat', verbose_name='Imagen')
+	image=models.ManyToManyField(Image, related_name='Images')
 	timestamp=models.DateTimeField(auto_now_add=True)
 	index = models.IntegerField()
 	def __unicode__(self):
@@ -97,10 +106,20 @@ class Table(models.Model):
 class Order(models.Model):
 	id=models.AutoField(primary_key=True)
 	table=models.ForeignKey(Table, related_name='u+')
-	foods=models.ManyToManyField(Food, related_name='u+')
+	foods=models.ManyToManyField(Food, related_name='u+', through='Details')
 	comment=models.CharField(max_length=1000)
 	state=models.IntegerField(choices=ORDER_STATE,max_length=2)
 	def __unicode__(self):
-		return u'%s  - %s' % (self.table.id,self.table.restaurant)
+		return u'table: %s  Restaurant: %s Foods: %s' % (self.table.id,self.table.restaurant,self.foods.count())
 	def natural_key(self):
-		return u'%s  - %s' % (self.table.id,self.table.restaurant)
+		return u'table: %s  Restaurant: %s Foods: %s' % (self.table.id,self.table.restaurant,self.foods.count())
+
+class Details(models.Model):
+	order=models.ForeignKey(Order, related_name='u+')
+	food=models.ForeignKey(Food, related_name='u+')
+	count=models.IntegerField()
+	timestamp=models.DateTimeField(auto_now_add=True)
+	def __unicode__(self):
+		return u'order: %s  -  Food: %s' % (self.order.id,self.food.name)
+	def natural_key(self):
+		return u'order: %s  -  Food: %s' % (self.order.id,self.food.name)

@@ -1,10 +1,49 @@
+header{
+	background-color: #485563;
+}
+
+div.panel{
+	padding-left: 1em;
+}
+
 div.panel div.panel-left{
 	display: inline-block;
 	vertical-align: middle;
-	width: 88%;
+	width: 85%;
 }
 div.panel div.panel-right{
 	display: inline-block;
 	vertical-align: middle;
-	width: 10%;
+	width: 13%;
+}
+
+div.lightbox{
+	background-color: rgba(255,255,255,0.5);
+	height: 100%;
+	left: 0px;
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	z-index: 99;
+}
+div.lightbox div.lightbox-container{
+	margin: 0 auto;
+	margin-top: 10%;
+	width: 30%;
+}
+
+header div.half{
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: middle;
+	width: 49%;
+}
+
+div.right{
+	text-align: right;
+}
+
+span.we-button{
+	padding: 1em 2em;
+	font-size: 1em;
 }

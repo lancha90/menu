@@ -53,6 +53,12 @@ div.container div.div_center{
 	text-align: center;
 }
 
+div.container div.item_image{
+	display: inline-block;
+	vertical-align: top;
+	margin: 1em;
+}
+
 div.container div.item_row{
 	display: inline-block;
 	cursor: pointer;

@@ -1,13 +1,19 @@
 <!DOCTYPE html>
+<html lang="en" ng-app="we_eat_admin">
     <head>
         <meta charset="utf-8">
         <meta content="Diego Mauricio Herrera Alzate" name="author"/>
+        <meta http-equiv="refresh" content="30" />
 
-        <title>WeEat - {% block title %}{% endblock %}</title>
+        <title>WeEat - {% block title %}Chef{% endblock %}</title>
  
         <link rel="stylesheet" href="{{STATIC_URL}}css/normalize.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.min.css">
         <link rel="stylesheet" href="{{STATIC_URL}}css/admin/style.css">
+
+        <script src="{{STATIC_URL}}js/angular.min.js"></script>
+        <script src="{{STATIC_URL}}js/jquery.min.js"></script>
+        <script src="{{STATIC_URL}}js/admin.js"></script>
 
         <!--[if lt IE 9]> HTML5Shiv
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -17,12 +23,27 @@
         {% endblock %}
  
     </head>
-    <body>
+    <body ng-controller="mainController">
         <header>
-            {% block heaer %}
-                <h1>We Eat</h1>
-            {% endblock %}
-             {% if user.username != '' %}
+            <div class="half">
+                <a href="/">
+                    <h1 style="color: white;"><Strong style="color: #DF691A;">We</Strong>Eat</h1>
+                </a>
+                <h5>Mayor Velocidad = Clientes satisfechos = Mas Clientes!</h5>
+            </div>
+            <div class="half right">
+                {% if user.username == '' %}
+                <a href="/users/login">
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon"></span> Log in
+                    </button>
+                </a>
+                <a href="/users/singup">
+                    <button type="button" class="btn btn-default">
+                        <span class="glyphicon"></span> Sing up
+                    </button>
+                </a>
+                {% else %}
                     <h2>{{user.username}}</h2>
                     <a href="/users/logout">
                     <button type="button" class="btn btn-default">
@@ -30,8 +51,21 @@
                     </button>
                 </a>
                 {% endif %}
+            </div>
         </header>
 
+    <div class="lightbox" ng-show="is_popup" ng-click="hide_popup()">
+        <div class="lightbox-container">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Información</h3>
+              </div>
+              <div class="panel-body">
+                {[{popup_message}]}
+              </div>
+            </div>
+        </div>
+    </div>
     <div class="content">
         {% block container %}
 
@@ -41,7 +75,5 @@
     <footer>
         
     </footer>
-        <script src="{{STATIC_URL}}js/angular.min.js"></script>
-        <script src="{{STATIC_URL}}js/admin.js"></script>
     </body>
 </html>
