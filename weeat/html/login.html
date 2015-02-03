@@ -53,10 +53,12 @@
 		{% endif %}
 
 
-        <form id='form' method='POST' action=''>
+
+        <form id='form' method='POST' action='/users/login/?next={{next}}'>
             {% csrf_token %}
             <table>{{form}}</table>
             <p><input type="submit" value="Log In"></p>
+            
         </form>
 </div>
 

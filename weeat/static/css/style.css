@@ -21,6 +21,7 @@ div.banner{
 	width: 20%;
 }
 div.banner div.banner-categories{
+	margin-left: 0.8em;
 	margin-top: 2em;
 }
 div.banner div.banner-categories h4{
@@ -88,9 +89,38 @@ img.icon_item{
 	height: 200px;
 }
 
+div.lightbox{
+	background-color: rgba(255,255,255,0.5);
+	height: 100%;
+	left: 0px;
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 99;
+}
+div.lightbox div.lightbox-container{
+	margin: 0 auto;
+	margin-top: 10%;
+	width: 30%;
+}
+div.lightbox div.lightbox-container div.panel-body{
+	text-align: center;
+}
+div.lightbox div.lightbox-container div.panel-body button{
+	border: solid 2px white; 
+}
+div.lightbox div.lightbox-container div.panel-body div{
+	margin: 1em;
+}
+
 /*
 Bootstrap rewritte
 */
 .form-group{
 	margin-bottom: 0px;
+}
+
+div.container div.cart_shop div.form-group{
+	display: block;
+	margin: 1em;
 }

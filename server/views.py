@@ -55,8 +55,11 @@ def update_order(request):
 
 #Autenticacion de usuarios
 def login_user(request):
+	next = ""
 	if not request.user.is_anonymous():
 		return HttpResponseRedirect('/')
+	if request.GET:
+		next = request.GET['next']
 	if request.method == 'POST':
 		form = AuthenticationForm(request.POST)
 		if form.is_valid:
@@ -68,21 +71,21 @@ def login_user(request):
 				if 'next' in request.GET:
 					next = request.GET['next']
 				else:
-					next='/'
+					next='/chef'
 				if next is not None:
 					return HttpResponseRedirect(next)
 				else:
 					return index(request)
 			else:
-				return login_form(request,True)
+				return login_form(request,True,next)
 	else:
-		return login_form(request,False)
+		return login_form(request,False,next)
 
-def login_form(request,isFirst):
+def login_form(request,isFirst,next):
 	form = AuthenticationForm()
-	return render_to_response('login.html',{'form':form,'message':isFirst},context_instance=RequestContext(request))
+	return render_to_response('login.html',{'form':form,'message':isFirst,'next':next},context_instance=RequestContext(request))
 
 @login_required(login_url='/users/login/')
 def logout_user(request):
 	logout(request)
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect('/users/login/')

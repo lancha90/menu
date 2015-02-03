@@ -23,9 +23,17 @@ function mainController($scope, $http) {
     $scope.is_detail_foods = false;
     $scope.is_cart_shop = false;
     
+    // Alert
+    $scope.is_alert = false;
+    $scope.is_number_food = false;
+    $scope.alert_title = '';
+    $scope.alert_message = '';
+    
     // Contexto
     $scope.cart_shop = [];
     $scope.current_food;
+    $scope.order_notes = '';
+    $scope.item_food;
 
     $http.defaults.headers.common['Authorization'] = 'Basic cm9vdDpJbmdfZGhlcnJlcmFfOTA=';
     $http.defaults.headers.common['Accept'] = 'application/json';
@@ -57,12 +65,17 @@ function mainController($scope, $http) {
         }
     }
 
-    // Adiciona un item a la orden 
+    // Almacena el plato en el contexto y solicita el ingreso de la cantidad
     $scope.add_cart_shop=function(_food){
-
-        count = prompt('Digite la cantidad:');
-
-        $scope.cart_shop.push({'food':_food,'count':count});
+        $scope.item_food=_food;
+        $scope.show_number_food();
+    };
+    // Adiciona el plata y la cantidad al carrito de compras
+    $scope.add_value_car_shop=function(_count){
+        $scope.cart_shop.push({'food':$scope.item_food,'count':_count});
+        $scope.item_food=null;
+        $scope.is_number_food = false;
+        $scope.show_alert('Info','Se adicionó el plato a su pedido, recuerde enviar el pedido al chef!');
     };
 
     // Visualizar el listado de categorias del restaurante
@@ -142,22 +155,25 @@ function mainController($scope, $http) {
 
         $http.post($scope.url_base+'api/v1/orders/1/add/', {
             "foods": list_order, 
-            "comment": "sin ensalada por favor"
+            "comment": $scope.order_notes
             })
             .success(function(data) {
-                $scope.formData = {};
-                $scope.todos = data;
-                console.log(data);
+                //$scope.formData = {};
+                //$scope.todos = data;
+                $scope.order_notes='';
+                $scope.cart_shop.length=0;
+                $scope.show_alert('Information','Su pedido fue enviado con exito, muy pronto le serviremos!')
+                $scope.navigation = [];
+                $scope.view_categories();
             })
             .error(function(data) {
-                console.log('Error:');
-                console.log(data);
+                $scope.show_alert('Error','Por favor, contacte con el personal del restaurante!')
             });
     };
 
     $scope.remove_decimal=function(value){
         return value.replace(/(\.\d+)+/,'');
-    }
+    };
 
     $scope.show_banner=function(){
 
@@ -170,7 +186,23 @@ function mainController($scope, $http) {
             $('div.container').css({'width':'100%','margin-left': '0'});
             $('div.banner').css({'margin-left':'-20%'});
         }
-    }
+    };
+
+    $scope.show_alert=function(_title,_message){
+        $scope.is_alert = true;
+        $scope.alert_title = _title
+        $scope.alert_message = _message;
+    };
+
+
+    $scope.hide_alert=function(){
+        $scope.is_alert = false;
+    };
+
+    $scope.show_number_food=function(){
+        $scope.is_number_food = true;
+    };
+
 }
 
 we_eat.filter('noFractionCurrency',
